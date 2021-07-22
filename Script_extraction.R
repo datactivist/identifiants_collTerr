@@ -94,6 +94,7 @@ OFGL_communes[,c(2,3,5,6)] <- lapply(OFGL_communes[,c(2,3,5,6)], as.numeric)
 OFGL_communes <- OFGL_communes %>% arrange(COG)
 
 # On supprime le doublon
+n_distinct(OFGL_communes)
 OFGL_communes <- OFGL_communes %>% unique()
 
 
@@ -146,11 +147,11 @@ OFGL_interco <- OFGL_interco %>% arrange(nom)
 
 
 # On exporte toutes ces bases qui aideront pour croiser des variables de différents jeux quand les noms d'organisation ne sont pas exactement les mêmes
-rio::export(OFGL_regions,"./Data/raw/identifiants_regions_2021.csv")
-rio::export(OFGL_departements,"./Data/raw/identifiants_departements_2021.csv")
-rio::export(OFGL_communes,"./Data/raw/identifiants_communes_2021.csv")
-rio::export(infos_coll,"./Data/raw/identifiants_collectivites_2021.csv")
-rio::export(OFGL_interco,"./Data/raw/identifiants_epci_2021.csv")
+rio::export(OFGL_regions,"./identifiants_regions_2021.csv")
+rio::export(OFGL_departements,"./identifiants_departements_2021.csv")
+rio::export(OFGL_communes,"./identifiants_communes_2021.csv")
+rio::export(infos_coll,"./identifiants_collectivites_2021.csv")
+rio::export(OFGL_interco,"./identifiants_epci_2021.csv")
 
 
 
