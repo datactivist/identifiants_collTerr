@@ -147,11 +147,11 @@ OFGL_interco <- OFGL_interco %>% arrange(nom)
 
 
 # On exporte toutes ces bases qui aideront pour croiser des variables de différents jeux quand les noms d'organisation ne sont pas exactement les mêmes
-rio::export(OFGL_regions,"./identifiants_regions_2021.csv")
-rio::export(OFGL_departements,"./identifiants_departements_2021.csv")
-rio::export(OFGL_communes,"./identifiants_communes_2021.csv")
-rio::export(infos_coll,"./identifiants_collectivites_2021.csv")
-rio::export(OFGL_interco,"./identifiants_epci_2021.csv")
+rio::export(OFGL_regions,"./Data/identifiants_regions_2021.csv")
+rio::export(OFGL_departements,"./Data/identifiants_departements_2021.csv")
+rio::export(OFGL_communes,"./Data/identifiants_communes_2021.csv")
+rio::export(infos_coll,"./Data/identifiants_collectivites_2021.csv")
+rio::export(OFGL_interco,"./Data/identifiants_epci_2021.csv")
 
 
 
