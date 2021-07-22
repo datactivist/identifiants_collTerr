@@ -22,8 +22,9 @@ OFGL_regions <- OFGL_regions %>% rename(COG = `Code Insee 2021 Région`,
 # On réordonne 
 OFGL_regions <- OFGL_regions[,c(2,4,1,3)]
 
-# On met au bon format les variables numériques
-OFGL_regions[,c(2,3)] <- lapply(OFGL_regions[,c(2,3)], as.numeric)
+# On met au bon format les variables 
+OFGL_regions$SIREN <- as.numeric(OFGL_regions$SIREN)
+OFGL_regions$COG <- as.character(OFGL_regions$COG)
 
 # On trie les observations avec COG par ordre croissant
 OFGL_regions <- OFGL_regions %>% arrange(COG)
@@ -54,11 +55,18 @@ OFGL_departements <- OFGL_departements[,c(3,5,2,4,1)]
 # On modifie le type "DEPT" par "DEP"
 OFGL_departements$type <- "DEP"
 
-# On met au bon format les variables numériques
-OFGL_departements[,c(2,3,5)] <- lapply(OFGL_departements[,c(2,3,5)], as.numeric)
+# On met au bon format les variables 
+OFGL_departements$SIREN <- as.numeric(OFGL_departements$SIREN)
+
+# Pour le code de la région on ajoute un "0" pour les COG de 1 à 9
+OFGL_departements$code_region <- sprintf("%02d", OFGL_departements$code_region)
 
 # On trie les observations avec COG par ordre croissant
 OFGL_departements <- OFGL_departements %>% arrange(COG) 
+
+# On créé une autre colonne du COG du département en mettant cette fois 3 digits (pour permettre les jointures si le COG est entré avec 2 ou 3 digits)
+OFGL_departements$COG_3digits <- OFGL_departements$COG
+OFGL_departements[c(1:95),]$COG_3digits <- paste0("0", OFGL_departements[c(1:95),]$COG_3digits)
 
 
 
@@ -87,15 +95,20 @@ OFGL_communes <- OFGL_communes[,c(4,6,3,5,1,2)]
 # On modifie le type "Commune" par "COM"
 OFGL_communes$type <- "COM"
 
-# On met au bon format les variables numériques
-OFGL_communes[,c(2,3,5,6)] <- lapply(OFGL_communes[,c(2,3,5,6)], as.numeric)
+# On passe le numéro SIREN au format numérique
+OFGL_communes$SIREN <- as.numeric(OFGL_communes$SIREN)
 
 # On trie les observations avec COG par ordre croissant
 OFGL_communes <- OFGL_communes %>% arrange(COG)
 
 # On supprime le doublon
-n_distinct(OFGL_communes)
+n_distinct(OFGL_communes)  #Les Trois Lacs en 2 fois
 OFGL_communes <- OFGL_communes %>% unique()
+
+# On créé aussi la colonne du COG de département avec 3 digits
+OFGL_communes$code_departement_3digits <- OFGL_communes$code_departement
+OFGL_communes[c(1:34808),]$code_departement_3digits <- paste0("0", OFGL_communes[c(1:34808),]$code_departement_3digits)
+
 
 
 
@@ -134,11 +147,15 @@ OFGL_interco <- OFGL_interco[,c(5,4,3,1,2)]
 OFGL_interco$type <- str_replace_all(OFGL_interco$type, c("MET69" = "M",  #cas spécifique pour la métropole de Lyon
                                                           "M" = "MET"))
 
-# On met au bon format les variables numériques
-OFGL_interco[,c(2,4,5)] <- lapply(OFGL_interco[,c(2,4,5)], as.numeric)
+# On passe le numéro SIREN au format numérique
+OFGL_interco$SIREN <- as.numeric(OFGL_interco$SIREN)
 
 # On trie les observations avec COG par ordre croissant
 OFGL_interco <- OFGL_interco %>% arrange(nom)
+
+# On créé aussi la colonne du COG de département avec 3 digits
+OFGL_communes$code_departement_3digits <- OFGL_communes$code_departement
+OFGL_communes[c(1:34808),]$code_departement_3digits <- paste0("0", OFGL_communes[c(1:34808),]$code_departement_3digits)
 
 
 
