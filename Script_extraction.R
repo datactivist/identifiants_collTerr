@@ -68,6 +68,9 @@ OFGL_departements <- OFGL_departements %>% arrange(COG)
 OFGL_departements$COG_3digits <- OFGL_departements$COG
 OFGL_departements[c(1:95),]$COG_3digits <- paste0("0", OFGL_departements[c(1:95),]$COG_3digits)
 
+# On ajoute la Corse qui n'est pas présente dans les données
+OFGL_departements <- OFGL_departements %>% add_row(nom = c("Corse-du-Sud","Haute-Corse"), SIREN = c(222000028,222000036), COG = c("2A","2B"), type = c("DEP","DEP"), code_region = c("94","94"), COG_3digits = c("02A","02B")) %>% arrange(COG) 
+
 
 
 
