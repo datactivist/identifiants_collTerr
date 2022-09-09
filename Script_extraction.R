@@ -158,7 +158,7 @@ OFGL_interco <- OFGL_interco %>% arrange(nom)
 
 # On créé aussi la colonne du COG de département avec 3 digits
 OFGL_communes$code_departement_3digits <- OFGL_communes$code_departement
-OFGL_communes[c(1:34808),]$code_departement_3digits <- paste0("0", OFGL_communes[c(1:34808),]$code_departement_3digits)
+OFGL_communes[c(1:34839),]$code_departement_3digits <- paste0("0", OFGL_communes[c(1:34839),]$code_departement_3digits)
 
 
 
@@ -172,10 +172,5 @@ rio::export(OFGL_departements,"./Data/identifiants_departements_2021.csv")
 rio::export(OFGL_communes,"./Data/identifiants_communes_2021.csv")
 rio::export(infos_coll,"./Data/identifiants_collectivites_2021.csv")
 rio::export(OFGL_interco,"./Data/identifiants_epci_2021.csv")
-
-
-
-
-
 
 
