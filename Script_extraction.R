@@ -157,9 +157,7 @@ OFGL_interco$SIREN <- as.numeric(OFGL_interco$SIREN)
 OFGL_interco <- OFGL_interco %>% arrange(nom)
 
 # On créé aussi la colonne du COG de département avec 3 digits
-OFGL_communes$code_departement_3digits <- OFGL_communes$code_departement
-OFGL_communes[c(1:34839),]$code_departement_3digits <- paste0("0", OFGL_communes[c(1:34839),]$code_departement_3digits)
-
+OFGL_communes <- OFGL_communes %>% mutate(test = as.character(sprintf("%03d", as.integer(code_departement))))
 
 
 
@@ -167,10 +165,10 @@ OFGL_communes[c(1:34839),]$code_departement_3digits <- paste0("0", OFGL_communes
 
 
 # On exporte toutes ces bases qui aideront pour croiser des variables de différents jeux quand les noms d'organisation ne sont pas exactement les mêmes
-rio::export(OFGL_regions,"./Data/identifiants_regions_2021.csv")
-rio::export(OFGL_departements,"./Data/identifiants_departements_2021.csv")
-rio::export(OFGL_communes,"./Data/identifiants_communes_2021.csv")
-rio::export(infos_coll,"./Data/identifiants_collectivites_2021.csv")
-rio::export(OFGL_interco,"./Data/identifiants_epci_2021.csv")
+rio::export(OFGL_regions, paste("./Data/identifiants_regions_", format(Sys.Date(), "%Y"), ".csv", sep = ""))
+rio::export(OFGL_departements, paste("./Data/identifiants_departements_", format(Sys.Date(), "%Y"), ".csv", sep = ""))
+rio::export(OFGL_communes, paste("./Data/identifiants_communes_", format(Sys.Date(), "%Y"), ".csv", sep = ""))
+rio::export(infos_coll, paste("./Data/identifiants_collectivites_", format(Sys.Date(), "%Y"), ".csv", sep = ""))
+rio::export(OFGL_interco, paste("./Data/identifiants_epci_", format(Sys.Date(), "%Y"), ".csv", sep = ""))
 
 
